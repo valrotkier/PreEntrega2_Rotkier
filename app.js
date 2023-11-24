@@ -9,7 +9,8 @@ const puntaje = {
 };
 
 // Creamos un array para almacenar el historial de movimientos
-const historialMovimientos = [];
+const historialMovimientosUsuario = [];
+const historialMovimientosComputadora = [];
 
 function eligeMovimientoComputadora() {
   const randomNumber = Math.random();
@@ -25,7 +26,7 @@ function eligeMovimientoComputadora() {
   }
 
   //Se agrega, mediante la funcion push(), la eleccion de la computadora como un nuevo objeto al array creado historialMovimientos.
-  historialMovimientos.push({
+  historialMovimientosComputadora.push({
     jugador: "Computadora",
     eleccion: eleccionComputadora,
   });
@@ -61,7 +62,7 @@ function jugarJuego() {
       const eleccionComputadora = eligeMovimientoComputadora();
 
       // Se agrega la elección del usuario al historial de movimientos
-      historialMovimientos.push({
+      historialMovimientosUsuario.push({
         jugador: "Usuario",
         eleccion: eleccionUsuario,
       });
@@ -124,7 +125,14 @@ Ganadas: ${puntaje.ganadas}, Perdidas: ${puntaje.perdidas}, Empates: ${puntaje.e
   // Sale del bucle
 
   // Muestra el historial de movimientos al final del juego en la consola
-  console.log("Historial de movimientos:", historialMovimientos);
+  console.log(
+    "Historial de movimientos del Usuario:",
+    historialMovimientosUsuario
+  );
+  console.log(
+    "Historial de movimientos de la Computadora:",
+    historialMovimientosComputadora
+  );
 
   if (usuarioGana >= 2) {
     alert("Ganaste el mejor de 3!");
