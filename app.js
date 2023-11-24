@@ -61,12 +61,6 @@ function jugarJuego() {
     ) {
       const eleccionComputadora = eligeMovimientoComputadora();
 
-      // Se agrega la elección del usuario al historial de movimientos
-      historialMovimientosUsuario.push({
-        jugador: "Usuario",
-        eleccion: eleccionUsuario,
-      });
-
       let resultado = "";
 
       // Esto determina el resultado de la ronda
@@ -111,6 +105,13 @@ function jugarJuego() {
         puntaje.empates += 1;
       }
 
+      // Se agrega la elección del usuario al historial de movimientos
+      historialMovimientosUsuario.push({
+        jugador: "Usuario",
+        eleccion: eleccionUsuario,
+        resultado: resultado,
+      });
+
       alert(
         `${resultado}. Elegiste ${eleccionUsuario}. Computadora eligió ${eleccionComputadora}.
 Ganadas: ${puntaje.ganadas}, Perdidas: ${puntaje.perdidas}, Empates: ${puntaje.empates}`
@@ -134,6 +135,28 @@ Ganadas: ${puntaje.ganadas}, Perdidas: ${puntaje.perdidas}, Empates: ${puntaje.e
     historialMovimientosComputadora
   );
 
+  // Aca aplicamos metodo de filtrado sobre arrays con .filter
+  // Utilizamos .filter para crear un nuevo array que contiene solo los movimientos.
+  // Luego aplicamos .length para obtener la cantidad de elementos en cada uno de estos nuevos arrays filtrados, lo que representa el número de ganadas, perdidas y empates del usuario en el juego.
+
+  const ganadasUsuario = historialMovimientosUsuario.filter(
+    (movimiento) => movimiento.resultado === "GANASTE"
+  ).length;
+
+  const perdidasUsuario = historialMovimientosUsuario.filter(
+    (movimiento) => movimiento.resultado === "PERDISTE"
+  ).length;
+
+  const empatesUsuario = historialMovimientosUsuario.filter(
+    (movimiento) => movimiento.resultado === "EMPATE"
+  ).length;
+
+  //Mostramos en consola
+  console.log(
+    `Usuario: Ganadas: ${ganadasUsuario}, Perdidas: ${perdidasUsuario}, Empates: ${empatesUsuario}`
+  );
+
+  // Esto muestra el alert al usuario si gana o pierde.
   if (usuarioGana >= 2) {
     alert("Ganaste el mejor de 3!");
   } else {
